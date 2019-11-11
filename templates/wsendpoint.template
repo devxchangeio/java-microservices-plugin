@@ -1,0 +1,51 @@
+package #package;
+
+import org.apache.log4j.Logger;
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
+import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
+import org.springframework.ws.server.endpoint.annotation.RequestPayload;
+import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+
+/**
+ * Created by oneclicklabs.io
+ */
+@Endpoint
+public class #classname {
+	private static final String NAMESPACE_URI = "#namespace_uri";
+
+	private static final Logger logger = Logger.getLogger(#classname.class);
+
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getSoapRequest")
+	@ResponsePayload
+	public GetSoapResponse getSomething(@RequestPayload GetSoapRequest request) {
+		GetSoapResponse response = new GetSoapResponse();
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("Start getSoapRequest");
+			logger.debug("data: '" + request.getName() + "'");
+		}
+
+		try {
+			switch (request.getVersion()) {
+			case 1:
+				if (logger.isDebugEnabled())
+					logger.debug("in version 1");
+				// TODO: add your business logic here
+				response.setName("Response from Spring SOAP Webservice : " + request.getName());
+
+				break;
+			default:
+				throw new Exception("Unsupported version: " + request.getVersion());
+			}
+		} catch (Exception e) {
+			response.setName(e.getMessage().toString());
+		}
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("result: '" + response + "'");
+			logger.debug("End getSoapRequest");
+		}
+
+		return response;
+	}
+}

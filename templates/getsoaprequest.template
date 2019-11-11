@@ -1,0 +1,39 @@
+package #package;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+/**
+ * Created by oneclicklabs.io
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = { "name", "version" })
+@XmlRootElement(name = "getSoapRequest")
+public class GetSoapRequest {
+
+	@XmlElement(required = true)
+	protected String name;
+
+	@XmlElement(required = false)
+	protected int version;
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String value) {
+		this.name = value;
+	}
+
+}
